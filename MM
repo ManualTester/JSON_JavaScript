@@ -1,0 +1,20 @@
+Minutes and action items.
+
+
+
+1. Stateful API services automation (POC) is to generate tokens and login scenario. - Done
+2. Inform the tech stack in test automation framework (JAVA, REST API,TestNG,Cucumber). Done
+3. Phase 1 targets minimal or low complexity APIs scheduled to deliver 27 services. AI -Team.
+4. POC started with Admin Services. AI - 1 - Reporting part required to be enhanced.
+
+5. Test Automation approach legacy vs app-mod API response comparision, the current comparision needed to be enhanced to handle diffrence/addtional attribute on legacy/app-mod side in html report. 
+	It was suggested to explore and adapt exiting comparator utility from TR. AI - 2 - Evaluating the TR framework meeting has been scheduled.
+6. Externalized complex or large test data instead of using feature file data tables use CSV file or a centralized database. AI - Team.
+7. The existing Traffic Replay already captures live QA data from Splunk via REST APIs, saves it to a database. Team should evaluate the existing traffic replay framework to potentially reuse components or adopt the entire framework to reduce effort. AI - Team.
+
+The following items were identified as next steps or tasks to be executed:
+
+1.  Evaluate the existing traffic replay framework to determine if it can be leveraged or adopted to reduce effort in comparison to the current POC framework.
+2.  Assign team members to focus on evaluating the existing traffic replay system immediately, while the rest of the team continues the ongoing POC work.
+3.  Integrate Comparator Utility used by the traffic replay team to handle complex, large-scale JSON comparison.
+4.  Reporting Enhancement look into developing an HTML comparison report for side-by-side visualization of legacy and ap-mod API responses.
