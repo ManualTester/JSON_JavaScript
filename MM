@@ -1,0 +1,28 @@
+The discussion covered several key aspects related to test case documentation, traffic replay execution, comparison methodology, reporting, and future API automation development:
+
+Test Case Documentation and Structure:
+    *   All work, including test cases for API automation, must be documented in Zephyr, Appname field should be updated.
+
+Traffic Replay Process:*
+    *   Traffic replay consists of two main parts: *capturing the log* and *execution* .
+    *   *Log Capturing:* Logs are captured by connecting to Zephyr, interpreting the test case details, and then logging into Splunk to form a query. The query fetches fresh logs (requests and responses) from non-prod (or potentially prod in the future).
+    *   *Data Storage:* Captured logs (requests) are stored in a dedicated database named QA replay request data, which is only located in QA1. This DB is separate from SPS code and can store request data from various regions.
+    *   *Execution Setup:* Execution involves deploying two versions of the code on two separate hosts in TU QA1: the future production version (QA version) and the current production version (benchmark.
+
+Comparison and Comparator Logic:*
+    *   The main goal of traffic replay is to compare the version going into production with the version currently in production.
+    *   The comparator is a crucial component that compares the JSON responses obtained in real-time from the two services (source/prod version response vs. target/QA version response).
+    *   The comparison often involves validating a new non-WebSphere/Spring Boot version (QA) against an older WebSphere version (Prod).
+    *   The comparator code utilizes a *Google comparator* and Jackson API to convert the response objects (XML or JSON) into JSON.
+    *   *Differences Identified:* The report highlights data fields present only in the production version, fields present only in the QA version, matching fields, and fields that are present in both but have differing values.
+   
+Reporting Tools and Generation:*
+    *   Extent Report* (HTML), capture test results differences.
+    *   SPS Dashboard which is built using React for the UI and Spring Boot for the backend wil be the ultimate reporting tool.
+    *   The reporting implementation is decoupled from the main execution code by using *TestNG listeners* (ITestListener, ISuiteListener), ensuring the report is generated only after the entire test suite execution is complete (onFinish).
+
+Next Steps API Automation Development (POC):
+    *   The team should initiate the Proof of Concept (POC).
+    *   The new API automation should follow a BDD (Behavior-Driven Development) approach, similar to the UI automation, including module-based tagging.
+    *   For saving requests, the team can ignore the complex Splunk capturing part used by traffic replay and instead save requests permanently in the database.
+    *   It was agreed that for the comparison, it is better to hit the legacy and new services directly to use *live data* rather than relying on stored JSON file
